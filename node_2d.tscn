@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://cndb4p2pjtv6t" path="res://player.gd" id="1_0e48y"]
 [ext_resource type="Texture2D" uid="uid://gp46g5iijrwk" path="res://assets/player/Idle (16 x 16).png" id="1_wtcfe"]
 [ext_resource type="Texture2D" uid="uid://d2g2pmrn8fkis" path="res://assets/player/Falling (16 x 16).png" id="2_q6r6c"]
+[ext_resource type="Texture2D" uid="uid://cgxcvy3jn27y6" path="res://assets/player/Ducking (16 x 16).png" id="3_11n1f"]
 [ext_resource type="Texture2D" uid="uid://og6an6l5if6k" path="res://assets/player/Jump (16 x 16).png" id="4_kdubu"]
 [ext_resource type="Texture2D" uid="uid://d12yo6qtcdbrs" path="res://assets/player/Waddling (16 x 16).png" id="5_d21ai"]
 [ext_resource type="Texture2D" uid="uid://c7cthq4775mkg" path="res://assets/texture/Terrain (16 x 16).png" id="6_kdubu"]
@@ -11,6 +12,10 @@
 [ext_resource type="Texture2D" uid="uid://bulvt7xb0o77v" path="res://assets/texture/Background parts/3 - Big_mountain_BG.png" id="9_hqns4"]
 [ext_resource type="Texture2D" uid="uid://dpm8cmg3518iy" path="res://assets/texture/Background parts/2 - Smaller_mountains.png" id="10_x0ka3"]
 [ext_resource type="Texture2D" uid="uid://dxat8g13y3lhd" path="res://assets/texture/Background parts/_Complete_static_BG_(288 x 208).png" id="11_0h7mo"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_11n1f"]
+atlas = ExtResource("3_11n1f")
+region = Rect2(0, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rj586"]
 atlas = ExtResource("2_q6r6c")
@@ -66,6 +71,14 @@ region = Rect2(80, 0, 16, 16)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ckb4l"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_11n1f")
+}],
+"loop": 1,
+"name": &"duck",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_rj586")
@@ -328,7 +341,7 @@ tile_set = SubResource("TileSet_3si4x")
 
 [node name="Parallaxlonge" type="Parallax2D" parent="." unique_id=828890781]
 z_index = -30
-scroll_scale = Vector2(0.1, 0.85)
+scroll_scale = Vector2(0.1, 1.0)
 scroll_offset = Vector2(0, 200)
 repeat_size = Vector2(288, 0)
 repeat_times = 3
@@ -342,7 +355,7 @@ region_rect = Rect2(0, 0, 864, 208)
 
 [node name="Parallaxmedio" type="Parallax2D" parent="." unique_id=1192084563]
 z_index = -20
-scroll_scale = Vector2(0.3, 0.9)
+scroll_scale = Vector2(0.3, 1.0)
 scroll_offset = Vector2(0, 200)
 repeat_size = Vector2(288, 0)
 repeat_times = 3
@@ -356,7 +369,7 @@ region_rect = Rect2(0, 0, 864, 208)
 
 [node name="Parallaxperto" type="Parallax2D" parent="." unique_id=523381560]
 z_index = -10
-scroll_scale = Vector2(0.6, 0.95)
+scroll_scale = Vector2(0.6, 1.0)
 scroll_offset = Vector2(0, 200)
 repeat_size = Vector2(288, 0)
 repeat_times = 3
