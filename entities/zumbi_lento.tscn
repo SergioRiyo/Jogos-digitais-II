@@ -1,0 +1,41 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://scripts/zumbi.gd" id="1_script"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_corpo"]
+radius = 12.0
+height = 64.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ataque"]
+size = Vector2(40, 44)
+
+[node name="ZumbiLento" type="CharacterBody2D"]
+texture_filter = 1
+collision_layer = 2
+collision_mask = 3
+script = ExtResource("1_script")
+tipo_sprite = "zumbi_lento"
+tamanho_quadro = Vector2i(70, 67)
+vida_maxima = 4
+velocidade = 35.0
+dano = 1
+distancia_de_ataque = 60.0
+distancia_de_visao = 130.0
+animacao_de_andar = &"walk"
+tempo_entre_ataques = 1.2
+quadro_do_golpe = 3
+quadros_do_ataque = 6
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_corpo")
+
+[node name="AreaAtaque" type="Area2D" parent="."]
+position = Vector2(30, 0)
+collision_layer = 0
+collision_mask = 1
+monitoring = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AreaAtaque"]
+shape = SubResource("RectangleShape2D_ataque")
