@@ -1,0 +1,124 @@
+[gd_scene load_steps=11 format=3]
+
+[ext_resource type="PackedScene" path="res://entities/jogador.tscn" id="1_jogador"]
+[ext_resource type="PackedScene" path="res://entities/zumbi_lento.tscn" id="2_lento"]
+[ext_resource type="PackedScene" path="res://entities/zumbi_rapido.tscn" id="3_rapido"]
+[ext_resource type="PackedScene" path="res://entities/zumbi_grande.tscn" id="4_grande"]
+[ext_resource type="Texture2D" path="res://assets/texture/Background parts/3 - Big_mountain_BG.png" id="5_longe"]
+[ext_resource type="Texture2D" path="res://assets/texture/Background parts/2 - Smaller_mountains.png" id="6_medio"]
+[ext_resource type="Texture2D" path="res://assets/texture/Background parts/1 - Snowy_foreground_area.png" id="7_perto"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_chao"]
+size = Vector2(960, 36)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_parede"]
+size = Vector2(32, 360)
+
+[sub_resource type="LabelSettings" id="LabelSettings_controles"]
+font_size = 8
+font_color = Color(0.07, 0.12, 0.2, 1)
+outline_size = 2
+outline_color = Color(0.85, 0.94, 1, 0.9)
+
+[node name="Combate" type="Node2D"]
+
+[node name="ParallaxLonge" type="Parallax2D" parent="."]
+z_index = -30
+scroll_scale = Vector2(0.1, 1)
+scroll_offset = Vector2(0, 138)
+repeat_size = Vector2(288, 0)
+repeat_times = 5
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxLonge"]
+texture_filter = 1
+texture_repeat = 2
+texture = ExtResource("5_longe")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 1440, 208)
+
+[node name="ParallaxMedio" type="Parallax2D" parent="."]
+z_index = -20
+scroll_scale = Vector2(0.3, 1)
+scroll_offset = Vector2(0, 138)
+repeat_size = Vector2(288, 0)
+repeat_times = 5
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxMedio"]
+texture_filter = 1
+texture_repeat = 2
+texture = ExtResource("6_medio")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 1440, 208)
+
+[node name="ParallaxPerto" type="Parallax2D" parent="."]
+z_index = -10
+scroll_scale = Vector2(0.6, 1)
+scroll_offset = Vector2(0, 138)
+repeat_size = Vector2(288, 0)
+repeat_times = 5
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxPerto"]
+texture_filter = 1
+texture_repeat = 2
+texture = ExtResource("7_perto")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 1440, 208)
+
+[node name="ChaoVisual" type="Polygon2D" parent="."]
+z_index = -5
+polygon = PackedVector2Array(0, 328, 960, 328, 960, 380, 0, 380)
+color = Color(0.76, 0.88, 0.94, 1)
+
+[node name="Chao" type="StaticBody2D" parent="."]
+position = Vector2(480, 346)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Chao"]
+shape = SubResource("RectangleShape2D_chao")
+
+[node name="ParedeEsquerda" type="StaticBody2D" parent="."]
+position = Vector2(-16, 168)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ParedeEsquerda"]
+shape = SubResource("RectangleShape2D_parede")
+
+[node name="ParedeDireita" type="StaticBody2D" parent="."]
+position = Vector2(976, 168)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ParedeDireita"]
+shape = SubResource("RectangleShape2D_parede")
+
+[node name="Jogador" parent="." instance=ExtResource("1_jogador")]
+position = Vector2(120, 296)
+
+[node name="Camera2D" type="Camera2D" parent="Jogador"]
+zoom = Vector2(3, 3)
+position_smoothing_enabled = true
+position_smoothing_speed = 8.0
+
+[node name="ZumbiLento" parent="." instance=ExtResource("2_lento")]
+position = Vector2(360, 294)
+
+[node name="ZumbiRapido" parent="." instance=ExtResource("3_rapido")]
+position = Vector2(610, 298)
+
+[node name="ZumbiGrande" parent="." instance=ExtResource("4_grande")]
+position = Vector2(850, 294)
+
+[node name="Interface" type="CanvasLayer" parent="."]
+
+[node name="Controles" type="Label" parent="Interface"]
+offset_left = 8.0
+offset_top = 6.0
+offset_right = 230.0
+offset_bottom = 20.0
+text = "A/D ou setas: mover   W/Espaco: pular   J: atacar"
+label_settings = SubResource("LabelSettings_controles")
